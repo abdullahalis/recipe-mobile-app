@@ -12,7 +12,7 @@ final class RecipeViewModel: ObservableObject {
     @Published var recipes: [Recipe] = []
     @Published var recipesLoading = true
     
-    @Published var error: RecipeError?
+    @Published var error: APIError?
     @Published var hasError = false
     
     private let apiManager = APIManager()
@@ -28,27 +28,10 @@ final class RecipeViewModel: ObservableObject {
         } catch let apiError as APIError {
             print("API Error")
             self.hasError = true
-            self.error = .custom(error: apiError)
+            self.error = error
         } catch {
             self.hasError = true
-            self.error = .custom(error: error)
+            self.error = .unknown(error)
         }
     }
 }
-
-extension RecipeViewModel {
-    enum RecipeError: LocalizedError {
-        case custom(error: Error)
-        case decodeFailed
-        
-        var errorDescription: String? {
-            switch self {
-            case .decodeFailed:
-                return "Failed to decode response"
-            case .custom(let error):
-                return error.localizedDescription
-            }
-        }
-    }
-}
-

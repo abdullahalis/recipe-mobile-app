@@ -7,25 +7,23 @@
 
 import Foundation
 
+
 final class APIManager: ObservableObject {
+    // url of API that we are calling
+    let endpoint: String
     
+    init(endpoint: String = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") { // default to normal recipes endpoint
+        self.endpoint = endpoint
+    }
+    
+    // Calls API and returns the list of recipes
     func fetchRecipes() async throws -> [Recipe] {
-        // url of API that we are calling
-        let endpoint = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json"
         
-        // Get data if url is valid
-        guard let url = URL(string: endpoint) else {
-            throw APIError.invalidURL
-        } // TODO: handle url error
-        
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw APIError.invalidResponse
-        }
+        let data = try await fetchData()
         
         do {
             let decoder = JSONDecoder()
+            // Convert snake case to camelcase
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let recipes = try decoder.decode(Recipes.self, from: data)
             return recipes.recipes
@@ -33,6 +31,29 @@ final class APIManager: ObservableObject {
             print("Error: decoding failed")
             throw APIError.decodingFailed
         }
+    }
+    
+    // Get data from API
+    public func fetchData() async throws -> Data {
+        // Get data if url is valid
+       guard let url = URL(string: endpoint) else {
+           print("Invalid URL")
+           throw APIError.invalidURL
+       }
+
+       do {
+           let (data, response) = try await URLSession.shared.data(from: url)
+
+           // Check the response
+           guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+               print("Invalid response")
+               throw APIError.invalidResponse
+           }
+
+           return data
+       } catch {
+           throw APIError.invalidResponse
+       }
     }
 }
 
