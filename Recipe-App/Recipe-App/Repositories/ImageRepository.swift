@@ -13,26 +13,29 @@ protocol ImageRepository {
 }
 
 class ImageRepositoryImpl: ImageRepository {
-    private let apiManager: APIManager
-    private let cacheManager: CacheManager
+    private let endpoint: String
     
-    init(apiManager: APIManager, cacheManager: CacheManager) {
-        self.apiManager = apiManager
-        self.cacheManager = cacheManager
+    private let apiManager: APIManager = APIManager()
+    private let imageCache = ImageCache.shared
+    
+    init(endpoint: String) {
+        self.endpoint = endpoint
+
     }
     
     func fetchImage() async throws -> UIImage {
         do {
             //print("fetching from id: \(uuid), link: \(apiManager.endpoint)")
-            if let cached = cacheManager.get(key: apiManager.endpoint) {
+            if let cached = imageCache.cache.get(key: endpoint) {
+                print("got from cache")
                 return cached
             }
-            let data = try await apiManager.fetchData()
+            let data = try await apiManager.fetchData(endpoint: endpoint)
             
             // Try to use data returned as URL for image
             if let image = UIImage(data: data) {
-                print("new image")
-                cacheManager.set(image: image, key: apiManager.endpoint)
+                print("new image fetched: \(data)")
+                imageCache.cache.set(key: endpoint, value: image)
                 return image
             } else {
                 throw APIError.decodingFailed

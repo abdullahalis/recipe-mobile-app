@@ -10,8 +10,8 @@ import SwiftUI
 struct ImageLoadView: View {
     @StateObject var imageLoader: ImageLoad
     
-    init(endpoint: String?) {
-        self._imageLoader = StateObject(wrappedValue: ImageLoad(repository: ImageRepositoryImpl(apiManager: APIManager(endpoint: endpoint ?? ""), cacheManager: CacheManager.shared)))
+    init(endpoint: String) {
+        self._imageLoader = StateObject(wrappedValue: ImageLoad(endpoint: endpoint))
     }
     
     var body: some View {

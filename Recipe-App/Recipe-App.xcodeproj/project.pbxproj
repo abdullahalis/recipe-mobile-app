@@ -25,6 +25,8 @@
 		2FAC238C2DA5C5480054C93B /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC238B2DA5C5480054C93B /* RecipeRepository.swift */; };
 		2FAC23902DA5CA1D0054C93B /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC238F2DA5CA1D0054C93B /* CacheManager.swift */; };
 		2FAC23932DA5DA9C0054C93B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23922DA5DA9C0054C93B /* ImageRepository.swift */; };
+		2FAC23952DA6F58E0054C93B /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23942DA6F58E0054C93B /* DoublyLinkedList.swift */; };
+		2FAC23972DA7038C0054C93B /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23962DA7038C0054C93B /* LRUCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		2FAC238B2DA5C5480054C93B /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRepository.swift; sourceTree = "<group>"; };
 		2FAC238F2DA5CA1D0054C93B /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		2FAC23922DA5DA9C0054C93B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		2FAC23942DA6F58E0054C93B /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
+		2FAC23962DA7038C0054C93B /* LRUCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 			children = (
 				2FAC23652DA0471E0054C93B /* APIManager.swift */,
 				2FAC238F2DA5CA1D0054C93B /* CacheManager.swift */,
+				2FAC23942DA6F58E0054C93B /* DoublyLinkedList.swift */,
+				2FAC23962DA7038C0054C93B /* LRUCache.swift */,
 			);
 			path = DataUtilities;
 			sourceTree = "<group>";
@@ -282,7 +288,9 @@
 				2FAC23722DA0876E0054C93B /* RecipeDetailView.swift in Sources */,
 				2FAC23662DA0471E0054C93B /* APIManager.swift in Sources */,
 				2FAC23742DA08D250054C93B /* RecipeViewModel.swift in Sources */,
+				2FAC23972DA7038C0054C93B /* LRUCache.swift in Sources */,
 				2FAC23872DA4BF340054C93B /* ImageLoadView.swift in Sources */,
+				2FAC23952DA6F58E0054C93B /* DoublyLinkedList.swift in Sources */,
 				2FAC23892DA4BFB30054C93B /* ImageLoad.swift in Sources */,
 				2FAC23902DA5CA1D0054C93B /* CacheManager.swift in Sources */,
 				2FAC23932DA5DA9C0054C93B /* ImageRepository.swift in Sources */,

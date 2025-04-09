@@ -22,10 +22,15 @@ struct RecipeListView: View {
 //                        } placeholder: {
 //                            ProgressView()
 //                        }
-                        ImageLoadView(endpoint: recipe.photoUrlSmall)
-                        .frame(width: 60, height: 60)
-                        .clipped()
-                        .cornerRadius(8)
+                        Group {
+                            if recipe.photoUrlSmall != nil {
+                                ImageLoadView(endpoint: recipe.photoUrlSmall!)
+                                .frame(width: 60, height: 60)
+                                .clipped()
+                                .cornerRadius(8)
+                            }
+                        }
+                        
                         
                         VStack(alignment: .leading) {
                             Text(recipe.name)

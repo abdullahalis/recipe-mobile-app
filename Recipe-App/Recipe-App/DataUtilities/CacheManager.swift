@@ -8,24 +8,36 @@
 import Foundation
 import UIKit
 
-final class CacheManager: ObservableObject {
-    static let shared = CacheManager()
+//final class CacheManager {
+//    // Singleton so one cache is shared across application
+//    static let shared = CacheManager()
+//    
+//    private var cache: [String: UIImage] = [:]
+//    // Use a concurrent dispatch queue to prevent data races
+//    private let queue = DispatchQueue(label: "image.cache.queue", attributes: .concurrent)
+//
+//    init(cache: ) {}
+//
+//    func get(key: String) -> UIImage? {
+//        // Allow multiple threads to concurrently read
+//        queue.sync {
+//            return cache[key]
+//        }
+//    }
+//
+//    func set(image: UIImage, key: String) {
+//        // Only one thread can write at a time
+//        queue.sync(flags: .barrier) {
+//            cache[key] = image
+//        }
+//    }
+//}
+
+final class ImageCache {
+    // Singleton so one cache is shared across application
+    static let shared = ImageCache()
     
-    private var cache: [String: UIImage] = [:]
-    // Use dispatch queue to ensure one thread is accessing at a time
-    private let queue = DispatchQueue(label: "image.cache.queue")
+    // Set capacity fairly low to see if it works
+    let cache = LRUCache<String, UIImage>(capacity: 20)
 
-    private init() {}
-
-    func get(key: String) -> UIImage? {
-        queue.sync {
-            return cache[key]
-        }
-    }
-
-    func set(image: UIImage, key: String) {
-        queue.sync {
-            cache[key] = image
-        }
-    }
 }

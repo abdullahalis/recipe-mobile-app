@@ -12,16 +12,16 @@ protocol RecipeRepository {
 }
 
 class RecipeRepositoryImpl: RecipeRepository {
+    private let endpoint: String
+    private let apiManager: APIManager = APIManager()
     
-    private let apiManager: APIManager = APIManager(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
-    
-//    init(apiManager: APIManager) {
-//        self.apiManager = apiManager
-//    }
+    init(endpoint: String = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") {
+        self.endpoint = endpoint
+    }
     
     func fetchRecipes() async throws-> [Recipe] {
         do {
-            let data = try await apiManager.fetchData()
+            let data = try await apiManager.fetchData(endpoint: endpoint)
             return try await decodeRecipes(data: data)
         } catch {
             throw error

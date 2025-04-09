@@ -9,17 +9,17 @@ import Foundation
 
 
 final class APIManager: ObservableObject {
-    // url of API that we are calling
-    let endpoint: String
-    
-    init(endpoint: String) {
-        self.endpoint = endpoint
-    }
+//    // url of API that we are calling
+//    let endpoint: String
+//    
+//    init(endpoint: String) {
+//        self.endpoint = endpoint
+//    }
     
    
     
     // Get data from API
-    public func fetchData() async throws -> Data {
+    public func fetchData(endpoint: String) async throws -> Data {
         // Get data if url is valid
        guard let url = URL(string: endpoint) else {
            print("Invalid URL")

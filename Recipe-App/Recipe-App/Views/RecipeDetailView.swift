@@ -21,9 +21,11 @@ struct RecipeDetailView: View {
 //                } placeholder: {
 //                    ProgressView()
 //                }
-                ImageLoadView(endpoint: recipe.photoUrlLarge)
-                    .cornerRadius(12)
-
+                if recipe.photoUrlLarge != nil {
+                    ImageLoadView(endpoint: recipe.photoUrlLarge!)
+                        .cornerRadius(12)
+                }
+                
                 Text(recipe.name)
                     .font(.title)
                     .fontWeight(.bold)

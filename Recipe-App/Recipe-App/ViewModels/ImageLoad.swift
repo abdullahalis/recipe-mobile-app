@@ -23,8 +23,8 @@ class ImageLoad: ObservableObject {
 //    init(endpoint: String?) {
 //        self.endpoint = endpoint
 //    }
-    init(repository: ImageRepository) {
-        self.repository = repository
+    init(endpoint: String) {
+        self.repository = ImageRepositoryImpl(endpoint: endpoint)
     }
     
     func loadImage() async {
