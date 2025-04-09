@@ -16,13 +16,13 @@ struct RecipeListView: View {
             List(recipes, id: \.uuid) { recipe in
                 NavigationLink(value: recipe) {
                     HStack {
-                        AsyncImage(url: URL(string: recipe.photoUrlSmall)) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            ProgressView()
-                        }
+//                        AsyncImage(url: URL(string: recipe.photoUrlSmall)) { image in
+//                            image
+//                                
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+                        ImageLoadView(endpoint: recipe.photoUrlSmall)
                         .frame(width: 60, height: 60)
                         .clipped()
                         .cornerRadius(8)

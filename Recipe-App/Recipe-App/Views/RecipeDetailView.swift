@@ -13,14 +13,16 @@ struct RecipeDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                AsyncImage(url: URL(string: recipe.photoUrlLarge)) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(12)
-                } placeholder: {
-                    ProgressView()
-                }
+//                AsyncImage(url: URL(string: recipe.photoUrlLarge)) { image in
+//                    image
+//                        .resizable()
+//                        .scaledToFit()
+//                        .cornerRadius(12)
+//                } placeholder: {
+//                    ProgressView()
+//                }
+                ImageLoadView(endpoint: recipe.photoUrlLarge)
+                    .cornerRadius(12)
 
                 Text(recipe.name)
                     .font(.title)

@@ -15,23 +15,48 @@ final class RecipeViewModel: ObservableObject {
     @Published var error: APIError?
     @Published var hasError = false
     
-    private let apiManager = APIManager()
+    private let repository: RecipeRepository
     
+    init(repository: RecipeRepository = RecipeRepositoryImpl()) {
+        self.repository = repository
+    }
+    
+    // Load recipes from API
     func loadRecipes() async {
         
         recipesLoading = true
         hasError = false
+        
         do {
-            try await recipes = apiManager.fetchRecipes()
+            recipes = try await repository.fetchRecipes()
+            
+            if recipes.isEmpty {
+                self.hasError = true
+                self.error = .emptyData
+            }
+            
             recipesLoading = false
-            print("got recipes")
+            
         } catch let apiError as APIError {
-            print("API Error")
             self.hasError = true
-            self.error = error
+            self.error = apiError
         } catch {
             self.hasError = true
             self.error = .unknown(error)
         }
     }
+    
+//    // Decodes JSON response into recipes
+//    func decodeRecipes(data: Data) async throws -> [Recipe] {
+//        do {
+//            let decoder = JSONDecoder()
+//            // Convert snake case to camelcase
+//            decoder.keyDecodingStrategy = .convertFromSnakeCase
+//            let recipes = try decoder.decode(Recipes.self, from: data)
+//            return recipes.recipes
+//        } catch {
+//            print("Error: decoding failed")
+//            throw APIError.decodingFailed
+//        }
+//    }
 }

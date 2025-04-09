@@ -82,49 +82,7 @@ final class APIManagerTests: XCTestCase {
         }
     }
     
-    func testFullRecipes() async throws {
-        let apiManager = APIManager(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
-        
-        do {
-            let recipes = try await apiManager.fetchRecipes()
-            XCTAssertTrue(type(of: recipes) == [Recipe].self, "Expected recipes to be an array of Recipe")
-            XCTAssertFalse(recipes.isEmpty, "Expected recipes array to not be empty")
-            XCTAssertNotNil(recipes.first?.name, "Expected first recipe to have a name")
-        } catch {
-            XCTFail("Unexpected error type: \(error)")
-        }
-    }
     
-    func testMalformedRecipes() async throws {
-        let apiManager = APIManager(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")
-        
-        do {
-            _ = try await apiManager.fetchRecipes()
-            XCTFail("Expected decodingFailed error")
-        } catch let error as APIError {
-
-            switch error {
-                case .decodingFailed:
-                    // Successfully caught decoding error
-                    break
-                default:
-                    XCTFail("Unexpected error: \(error)")
-            }
-        } catch {
-            XCTFail("Unexpected error type: \(error)")
-        }
-    }
-    
-    func testEmptyRecipes() async throws {
-        let apiManager = APIManager(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")
-        
-        do {
-            let recipes = try await apiManager.fetchRecipes()
-            XCTAssertTrue(recipes.isEmpty, "Expected recipes array to be empty")
-        } catch {
-            XCTFail("Unexpected error type: \(error)")
-        }
-    }
 
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.

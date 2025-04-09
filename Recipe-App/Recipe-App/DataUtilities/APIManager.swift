@@ -12,26 +12,11 @@ final class APIManager: ObservableObject {
     // url of API that we are calling
     let endpoint: String
     
-    init(endpoint: String = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") { // default to normal recipes endpoint
+    init(endpoint: String) {
         self.endpoint = endpoint
     }
     
-    // Calls API and returns the list of recipes
-    func fetchRecipes() async throws -> [Recipe] {
-        
-        let data = try await fetchData()
-        
-        do {
-            let decoder = JSONDecoder()
-            // Convert snake case to camelcase
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let recipes = try decoder.decode(Recipes.self, from: data)
-            return recipes.recipes
-        } catch {
-            print("Error: decoding failed")
-            throw APIError.decodingFailed
-        }
-    }
+   
     
     // Get data from API
     public func fetchData() async throws -> Data {
@@ -43,7 +28,7 @@ final class APIManager: ObservableObject {
 
        do {
            let (data, response) = try await URLSession.shared.data(from: url)
-
+           
            // Check the response
            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                print("Invalid response")
@@ -61,6 +46,7 @@ enum APIError: Error, LocalizedError {
     case invalidURL
     case invalidResponse
     case decodingFailed
+    case emptyData
     case unknown(Error)
 
     var errorDescription: String? {
@@ -71,6 +57,8 @@ enum APIError: Error, LocalizedError {
             return "Invalid response from server."
         case .decodingFailed:
             return "Could not decode the data."
+        case .emptyData:
+            return "Data is empty."
         case .unknown(let error):
             return error.localizedDescription
         }
