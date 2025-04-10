@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 protocol ImageRepository {
     func fetchImage() async throws -> UIImage

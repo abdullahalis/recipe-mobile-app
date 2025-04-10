@@ -9,8 +9,8 @@ import Foundation
 
 final class LRUCache<Key: Hashable, Value> {
     private let capacity: UInt
-    private var cache: [Key: Node<Key, Value>] = [:] // For O(1) reads and writes
-    private let list = DoublyLinkedList<Key, Value>() // For LRU implementation
+    private(set) var cache: [Key: Node<Key, Value>] = [:] // For O(1) reads and writes
+    private(set) var list = DoublyLinkedList<Key, Value>() // For LRU implementation
     private let lock = NSLock() // To ensure thread safety and prevent race conditions
 
     init(capacity: UInt) {

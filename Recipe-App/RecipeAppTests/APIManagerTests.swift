@@ -10,10 +10,10 @@ import XCTest
 
 final class APIManagerTests: XCTestCase {
 
-//    override func setUpWithError() throws {
-//        
-//        // Put setup code here. This method is called before the invocation of each test method in the class.
-//    }
+    override func setUpWithError() throws {
+        
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
 //
 //    override func tearDownWithError() throws {
 //        // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -29,10 +29,9 @@ final class APIManagerTests: XCTestCase {
     
     
     func testFetchDataValidEndpoint() async throws {
-        let apiManager = APIManager(endpoint: "https://jsonplaceholder.typicode.com/users") // Test on fake json data
-   
+        let apiManager = APIManager()
         do {
-            let data = try await apiManager.fetchData()
+            let data = try await apiManager.fetchData(endpoint: "https://jsonplaceholder.typicode.com/users") // Test on fake json data
             XCTAssertFalse(data.isEmpty, "Data should not be empty")
         } catch {
             XCTFail("Expected successful response, but got error: \(error)")
@@ -40,10 +39,10 @@ final class APIManagerTests: XCTestCase {
     }
     
     func testFetchDataInvalidResponse() async throws {
-        let apiManager = APIManager(endpoint: "https://httpstat.us/404")
+        let apiManager = APIManager()
    
         do {
-            _ = try await apiManager.fetchData()
+            _ = try await apiManager.fetchData(endpoint: "https://httpstat.us/404")
             XCTFail("Expected invalidResponse error")
         } catch let error as APIError {
 
@@ -60,10 +59,10 @@ final class APIManagerTests: XCTestCase {
     }
     
     func testFetchDataInvalidEndpoint() async throws {
-        let apiManager = APIManager(endpoint: "")
+        let apiManager = APIManager()
    
         do {
-            _ = try await apiManager.fetchData()
+            _ = try await apiManager.fetchData(endpoint: "")
             XCTFail("Expected invalidURL error")
         } catch let error as APIError {
 

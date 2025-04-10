@@ -31,7 +31,7 @@ final class APIManager: ObservableObject {
            
            // Check the response
            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-               print("Invalid response")
+               print("Invalid response: \(response)")
                throw APIError.invalidResponse
            }
 
@@ -52,13 +52,13 @@ enum APIError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "The URL is invalid."
+            return "URL is invalid."
         case .invalidResponse:
             return "Invalid response from server."
         case .decodingFailed:
-            return "Could not decode the data."
+            return "Could not decode server data."
         case .emptyData:
-            return "Data is empty."
+            return "Server data is empty."
         case .unknown(let error):
             return error.localizedDescription
         }

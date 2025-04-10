@@ -9,11 +9,16 @@ import Foundation
 
 @MainActor
 final class RecipeViewModel: ObservableObject {
-    @Published var recipes: [Recipe] = []
-    @Published var recipesLoading = true
+    private(set) var recipes: [Recipe] = []
+    private(set) var cuisines: Set<String> = []
+    
+    @Published var filteredRecipes: [Recipe] = []
+    @Published var selectedCuisines: Set<String> = []
+    @Published var query: String = ""
     
     @Published var error: APIError?
     @Published var hasError = false
+    @Published var recipesLoading = true
     
     private let repository: RecipeRepository
     
@@ -23,12 +28,16 @@ final class RecipeViewModel: ObservableObject {
     
     // Load recipes from API
     func loadRecipes() async {
-        
         recipesLoading = true
         hasError = false
         
         do {
             recipes = try await repository.fetchRecipes()
+            filteredRecipes = recipes
+            
+            for recipe in recipes {
+                cuisines.insert(recipe.cuisine)
+            }
             
             if recipes.isEmpty {
                 self.hasError = true
@@ -40,23 +49,19 @@ final class RecipeViewModel: ObservableObject {
         } catch let apiError as APIError {
             self.hasError = true
             self.error = apiError
+            recipesLoading = false
         } catch {
             self.hasError = true
             self.error = .unknown(error)
+            recipesLoading = false
         }
     }
     
-//    // Decodes JSON response into recipes
-//    func decodeRecipes(data: Data) async throws -> [Recipe] {
-//        do {
-//            let decoder = JSONDecoder()
-//            // Convert snake case to camelcase
-//            decoder.keyDecodingStrategy = .convertFromSnakeCase
-//            let recipes = try decoder.decode(Recipes.self, from: data)
-//            return recipes.recipes
-//        } catch {
-//            print("Error: decoding failed")
-//            throw APIError.decodingFailed
-//        }
-//    }
+    func search() {
+        filteredRecipes = recipes.filter { recipe in
+            let matchesQuery = query.isEmpty || recipe.name.localizedCaseInsensitiveContains(query)
+            let matchesCuisine = selectedCuisines.isEmpty || selectedCuisines.contains(recipe.cuisine)
+            return matchesQuery && matchesCuisine
+        }
+    }
 }

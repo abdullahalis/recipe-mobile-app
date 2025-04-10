@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 //final class CacheManager {
 //    // Singleton so one cache is shared across application

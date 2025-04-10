@@ -33,10 +33,11 @@ final class RecipeViewModelTests: XCTestCase {
 //        }
 //    }
     func testFullRecipes() async throws {
-        let vm = await MainActor.run {RecipeViewModel(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")}
+        let vm = await RecipeViewModel(repository: RecipeRepositoryImpl(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json"))
         await vm.loadRecipes()
         
         let recipes = await vm.recipes
+        
         let error = await vm.error
         let hasError = await vm.hasError
         
@@ -47,7 +48,7 @@ final class RecipeViewModelTests: XCTestCase {
     }
     
     func testMalformedRecipes() async throws {
-        let vm = await MainActor.run {RecipeViewModel(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")}
+        let vm = await RecipeViewModel(repository: RecipeRepositoryImpl(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json"))
         await vm.loadRecipes()
         
         let recipes = await vm.recipes
@@ -56,11 +57,11 @@ final class RecipeViewModelTests: XCTestCase {
         
         XCTAssertTrue(recipes.isEmpty, "Expected recipes array to be empty")
         XCTAssertTrue(hasError, "Expected error")
-        XCTAssertEqual(error?.localizedDescription, "Could not decode the data.", "Expected decoding error, got \(error?.localizedDescription ?? "unknown")")
+        XCTAssertEqual(error?.localizedDescription, APIError.decodingFailed.localizedDescription, "Expected decoding error, got \(error?.localizedDescription ?? "unknown")")
     }
     
     func testEmptyRecipes() async throws {
-        let vm = await MainActor.run {RecipeViewModel(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")}
+        let vm = await RecipeViewModel(repository: RecipeRepositoryImpl(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json"))
         await vm.loadRecipes()
         
         let recipes = await vm.recipes
@@ -69,6 +70,6 @@ final class RecipeViewModelTests: XCTestCase {
         
         XCTAssertTrue(recipes.isEmpty, "Expected recipes array to be empty")
         XCTAssertTrue(hasError, "Expected error")
-        XCTAssertEqual(error?.localizedDescription, "Data is empty.", "Expected empty data error, got \(error?.localizedDescription ?? "unknown")")
+        XCTAssertEqual(error?.localizedDescription, APIError.emptyData.localizedDescription, "Expected empty data error, got \(error?.localizedDescription ?? "unknown")")
     }
 }

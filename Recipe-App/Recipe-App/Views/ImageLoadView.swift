@@ -20,9 +20,10 @@ struct ImageLoadView: View {
             if imageLoader.image != nil {
                 Image(uiImage: imageLoader.image!)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
             } else if imageLoader.error != nil {
-                Text(imageLoader.error!.errorDescription!)
+                EmptyView()
+//                Rectangle().fill(.gray)
             } else {
                 ProgressView()
             }
@@ -35,5 +36,5 @@ struct ImageLoadView: View {
 }
 
 #Preview {
-    ImageLoadView(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/small.jpg")
+    ImageLoadView(endpoint: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/small.jpgx")
 }
