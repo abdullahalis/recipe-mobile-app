@@ -56,6 +56,7 @@ struct YoutubePlayerView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            print("finished vidoeload")
             isLoading = false
         }
     }

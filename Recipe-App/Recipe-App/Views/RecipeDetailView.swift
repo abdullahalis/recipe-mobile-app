@@ -46,13 +46,13 @@ struct RecipeDetailView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.black.opacity(0.05))
-
+                        
+                        YoutubePlayerView(videoURL: youtubeURL, isLoading: $loadingVideo)
+                        .cornerRadius(12)
+                        
                         if loadingVideo {
                             ProgressView()
                         }
-
-                        YoutubePlayerView(videoURL: youtubeURL, isLoading: $loadingVideo)
-                            .cornerRadius(12)
                     }
                     .frame(height: 200)
                     .frame(maxWidth: .infinity)
