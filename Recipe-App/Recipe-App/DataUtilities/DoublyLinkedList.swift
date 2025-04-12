@@ -46,7 +46,7 @@ final class DoublyLinkedList<Key: Hashable, Value> {
         node.next = nil
     }
     
-    // Move a node to the head (it was recently used)
+    // Move a node to the head (recently used)
     func moveToHead(node: Node<Key, Value>) {
         remove(node: node)
         insertAtHead(node: node)

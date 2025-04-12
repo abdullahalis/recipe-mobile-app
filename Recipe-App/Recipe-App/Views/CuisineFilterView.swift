@@ -22,19 +22,15 @@ struct CuisineFilterView: View {
                 }) {
                     Text("Clear")
                         .bold()
-                        .padding()
                         .foregroundColor(purple)
-                        .cornerRadius(10)
                 }
-
                 Spacer()
-
+                // X button
                 Button(action: {
                     onSave()
                 }
                 ) {
                     Image(systemName: "xmark")
-                        .font(.headline)
                         .padding(8)
                         .background(purple)
                         .foregroundColor(.white)
@@ -46,7 +42,6 @@ struct CuisineFilterView: View {
             Text("Select Cuisines")
                 .font(.title2)
                 .bold()
-                .padding(.bottom)
 
             // Cuisine checkboxes
             ScrollView {

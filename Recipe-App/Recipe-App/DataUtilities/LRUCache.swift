@@ -21,6 +21,7 @@ final class LRUCache<Key: Hashable, Value> {
     func get(key: Key) -> Value? {
         lock.lock()
         defer { lock.unlock() }
+        
         if let node = cache[key] {
             list.moveToHead(node: node)
             return node.value
@@ -28,10 +29,11 @@ final class LRUCache<Key: Hashable, Value> {
         return nil
     }
     
-    // Inserts or updates the value for the given key
+    // Inserts or updates the value for the given key and sets to recently used
     func set(key: Key, value: Value) {
         lock.lock()
         defer { lock.unlock() }
+        
         if let node = cache[key] {
             node.value = value
             list.moveToHead(node: node)

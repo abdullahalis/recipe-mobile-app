@@ -16,16 +16,15 @@ class ImageRepositoryImpl: ImageRepository {
     private let endpoint: String
     
     private let apiManager: APIManager = APIManager()
-    private let imageCache = ImageCache.shared
+    private let imageCache = ImageCache.shared // Use singleton image cache so it is shared among all repository objects
     
     init(endpoint: String) {
         self.endpoint = endpoint
-
     }
     
     func fetchImage() async throws -> UIImage {
         do {
-            //print("fetching from id: \(uuid), link: \(apiManager.endpoint)")
+            // Get image from cache, otherwise call API
             if let cached = imageCache.cache.get(key: endpoint) {
                 print("got from cache")
                 return cached

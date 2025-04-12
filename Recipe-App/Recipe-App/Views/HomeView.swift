@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    
     @StateObject private var viewModel = RecipeViewModel()
     @State private var showFilter = false
     @State private var showFilterButton = true
@@ -79,20 +78,18 @@ struct ErrorView: View {
     }
 }
 
-
-
-#Preview {
-    HomeView()
-}
-
 struct RecipeView: View {
     @ObservedObject var viewModel: RecipeViewModel
     @Binding var showFilter: Bool
     @Binding var showFilterButton: Bool
+    
     var body: some View {
         ZStack {
+            
+            // Recipe list
             NavigationStack {
                 Group {
+                    // When user search/filters has no results
                     if viewModel.filteredRecipes.isEmpty {
                         Text("No matching recipes.")
                             .font(.body)
@@ -101,27 +98,29 @@ struct RecipeView: View {
                     else {
                         RecipeListView(recipes: viewModel.filteredRecipes, showFilterButton: $showFilterButton)
                     }
-                }.navigationTitle("Recipes")
+                }
+                .navigationTitle("Recipes")
             }
+            .searchable(text: $viewModel.query, prompt: "Search recipes") // Add search bar
             
-            .padding(.top, 0)
-            .searchable(text: $viewModel.query, prompt: "Search recipes")
+            // Filter based on search and filters
             .onChange(of: viewModel.query) { _, _ in viewModel.search() }
             .onChange(of: viewModel.selectedCuisines) { _, _ in viewModel.search() }
+            
+            // Add refresh capaiblity with swipe down
             .refreshable {
-                print("refreshing")
                 Task {
                     await viewModel.loadRecipes()
                 }
             }
             
+            // Filter button
             if showFilterButton {
                 VStack {
                     Spacer()
                     FilterButtonView(viewModel: viewModel, showFilter: $showFilter)
                 }
             }
-            
         }
     }
 }
@@ -137,15 +136,17 @@ struct FilterButtonView: View {
             }
         }) {
             ZStack(alignment: .topTrailing) {
+                // Main button
                 Image(systemName: "slider.horizontal.3")
                     .resizable()
-                    .frame(width: 25, height: 25)
+                    .frame(width: 30, height: 30)
                     .padding()
                     .background(.orange)
                     .foregroundColor(.white)
                     .clipShape(Circle())
                     .shadow(radius: 5)
                 
+                // Filter count
                 if !viewModel.selectedCuisines.isEmpty {
                     Text("\(viewModel.selectedCuisines.count)")
                         .font(.caption2)
@@ -157,8 +158,9 @@ struct FilterButtonView: View {
                 }
             }
         }
-        .padding(.trailing, 20)
         .padding(.bottom, 30)
+        
+        // Open filter screen when clicked
         .popover(isPresented: $showFilter) {
             CuisineFilterView(
                 allCuisines: Array(viewModel.cuisines).sorted(),
@@ -169,4 +171,8 @@ struct FilterButtonView: View {
             )
         }
     }
+}
+
+#Preview {
+    HomeView()
 }

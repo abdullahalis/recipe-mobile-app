@@ -37,21 +37,22 @@ struct RecipeDetailView: View {
                             .clipped()
                             .cornerRadius(12)
                     }
-//                    .frame(height: 250)
-//                    .frame(maxWidth: .infinity)
                 }
 
                 // YouTube video
                 if let youtubeURL = recipe.youtubeUrl {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.black.opacity(0.05))
-                        
                         YoutubePlayerView(videoURL: youtubeURL, isLoading: $loadingVideo)
                         .cornerRadius(12)
                         
+                        // Progress view if video stil loading
                         if loadingVideo {
-                            ProgressView()
+                            VStack {
+                                ProgressView()
+                                Text("Loading video...")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                     .frame(height: 200)
@@ -72,6 +73,7 @@ struct RecipeDetailView: View {
         }
         .navigationTitle("Recipe Details")
         .navigationBarTitleDisplayMode(.inline)
+        // Turn off filter button
         .onAppear() {
             showFilterButton = false
         }
@@ -84,11 +86,11 @@ struct RecipeDetailView: View {
     RecipeDetailView(recipe: Recipe(
         cuisine: "Malaysian",
         name: "Apam Balikkkkkkkkkkkkkkkkk",
-        photoUrlLarge: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/large.jpgx",
+        photoUrlLarge: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/large.jpg",
         photoUrlSmall: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/small.jpg",
         uuid: "0c6ca6e7-e32a-4053-b824-1dbf749910d8",
         sourceUrl: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ",
-        youtubeUrl: nil
+        youtubeUrl: "https://www.youtube.com/watch?v=6R8ffRRJcrg"
     ),
         showFilterButton: .constant(true))
 }

@@ -27,11 +27,11 @@
 		2FAC23932DA5DA9C0054C93B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23922DA5DA9C0054C93B /* ImageRepository.swift */; };
 		2FAC23952DA6F58E0054C93B /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23942DA6F58E0054C93B /* DoublyLinkedList.swift */; };
 		2FAC23972DA7038C0054C93B /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23962DA7038C0054C93B /* LRUCache.swift */; };
-		2FAC23992DA739D90054C93B /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23982DA739D90054C93B /* SearchBarView.swift */; };
 		2FAC239B2DA73A310054C93B /* CuisineFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC239A2DA73A310054C93B /* CuisineFilterView.swift */; };
 		2FAC239D2DA750FB0054C93B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC239C2DA750FB0054C93B /* ContentView.swift */; };
 		2FAC239F2DA833CF0054C93B /* YoutubePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC239E2DA833CE0054C93B /* YoutubePlayerView.swift */; };
 		2FAC23A12DA86D810054C93B /* CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23A02DA86D810054C93B /* CacheTests.swift */; };
+		2FAC23A32DA9D06E0054C93B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAC23A22DA9D06D0054C93B /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,11 +67,11 @@
 		2FAC23922DA5DA9C0054C93B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		2FAC23942DA6F58E0054C93B /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		2FAC23962DA7038C0054C93B /* LRUCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
-		2FAC23982DA739D90054C93B /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		2FAC239A2DA73A310054C93B /* CuisineFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineFilterView.swift; sourceTree = "<group>"; };
 		2FAC239C2DA750FB0054C93B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2FAC239E2DA833CE0054C93B /* YoutubePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubePlayerView.swift; sourceTree = "<group>"; };
 		2FAC23A02DA86D810054C93B /* CacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTests.swift; sourceTree = "<group>"; };
+		2FAC23A22DA9D06D0054C93B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +159,6 @@
 				2FAC236F2DA0819F0054C93B /* RecipeListView.swift */,
 				2FAC23862DA4BF340054C93B /* ImageLoadView.swift */,
 				2FAC23712DA0876E0054C93B /* RecipeDetailView.swift */,
-				2FAC23982DA739D90054C93B /* SearchBarView.swift */,
 				2FAC239A2DA73A310054C93B /* CuisineFilterView.swift */,
 				2FAC239E2DA833CE0054C93B /* YoutubePlayerView.swift */,
 			);
@@ -193,6 +192,7 @@
 				2FAC238F2DA5CA1D0054C93B /* CacheManager.swift */,
 				2FAC23942DA6F58E0054C93B /* DoublyLinkedList.swift */,
 				2FAC23962DA7038C0054C93B /* LRUCache.swift */,
+				2FAC23A22DA9D06D0054C93B /* APIError.swift */,
 			);
 			path = DataUtilities;
 			sourceTree = "<group>";
@@ -307,11 +307,11 @@
 				2FAC23972DA7038C0054C93B /* LRUCache.swift in Sources */,
 				2FAC23872DA4BF340054C93B /* ImageLoadView.swift in Sources */,
 				2FAC239D2DA750FB0054C93B /* ContentView.swift in Sources */,
+				2FAC23A32DA9D06E0054C93B /* APIError.swift in Sources */,
 				2FAC23952DA6F58E0054C93B /* DoublyLinkedList.swift in Sources */,
 				2FAC23892DA4BFB30054C93B /* ImageLoad.swift in Sources */,
 				2FAC23902DA5CA1D0054C93B /* CacheManager.swift in Sources */,
 				2FAC23932DA5DA9C0054C93B /* ImageRepository.swift in Sources */,
-				2FAC23992DA739D90054C93B /* SearchBarView.swift in Sources */,
 				2FAC239F2DA833CF0054C93B /* YoutubePlayerView.swift in Sources */,
 				2FAC23702DA0819F0054C93B /* RecipeListView.swift in Sources */,
 				2FAC23692DA04B320054C93B /* RecipeModel.swift in Sources */,

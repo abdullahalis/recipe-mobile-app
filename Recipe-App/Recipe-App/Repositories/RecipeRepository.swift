@@ -15,7 +15,7 @@ class RecipeRepositoryImpl: RecipeRepository {
     private let endpoint: String
     private let apiManager: APIManager = APIManager()
     
-    init(endpoint: String = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") {
+    init(endpoint: String = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") { // Default to full recipes API, this is only parameterized for testing
         self.endpoint = endpoint
     }
     
@@ -28,12 +28,12 @@ class RecipeRepositoryImpl: RecipeRepository {
         }
     }
     
-    // Decodes JSON response into recipes
+    // Decodes data response into recipes
     func decodeRecipes(data: Data) async throws -> [Recipe] {
         do {
             let decoder = JSONDecoder()
-            // Convert snake case to camelcase
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            decoder.keyDecodingStrategy = .convertFromSnakeCase // Convert snake case to camelcase
+            
             let recipes = try decoder.decode(Recipes.self, from: data)
             return recipes.recipes
         } catch {

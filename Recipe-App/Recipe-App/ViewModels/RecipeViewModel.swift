@@ -57,6 +57,7 @@ final class RecipeViewModel: ObservableObject {
         }
     }
     
+    // Handle user searches and filters
     func search() {
         filteredRecipes = recipes.filter { recipe in
             let matchesQuery = query.isEmpty || recipe.name.localizedCaseInsensitiveContains(query)
