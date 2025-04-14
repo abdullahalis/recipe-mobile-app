@@ -2,6 +2,7 @@
 
 ### Summary: 
 iOS app that fetches recipes from a remote API and displays them in a list. Allows users to search and filter recipes based on cuisine type. Uses a custom LRU cache to minimize network calls.
+
 https://github.com/user-attachments/assets/60ffa7c6-a2c0-4f84-9b63-9701ed26fd41
 
 ### Focus Areas: 
