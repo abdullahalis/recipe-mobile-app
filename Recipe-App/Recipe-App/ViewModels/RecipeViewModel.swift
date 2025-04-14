@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// The main view model for managing recipe data, search functionality, and UI state.
+///
+/// - Parameter repository: The recipe data source (defaults to `RecipeRepositoryImpl`).
 @MainActor
 final class RecipeViewModel: ObservableObject {
     private(set) var recipes: [Recipe] = []
@@ -26,7 +29,7 @@ final class RecipeViewModel: ObservableObject {
         self.repository = repository
     }
     
-    // Load recipes from API
+    /// Loads recipe data asynchronously, updates internal state, and handles API errors.
     func loadRecipes() async {
         recipesLoading = true
         hasError = false
@@ -57,7 +60,7 @@ final class RecipeViewModel: ObservableObject {
         }
     }
     
-    // Handle user searches and filters
+    /// Filters the loaded recipes based on the search query and selected cuisines.
     func search() {
         filteredRecipes = recipes.filter { recipe in
             let matchesQuery = query.isEmpty || recipe.name.localizedCaseInsensitiveContains(query)

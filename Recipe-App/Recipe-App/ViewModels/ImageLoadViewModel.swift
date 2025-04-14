@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class ImageLoad: ObservableObject {
+/// The main view model for managing image data and UI state.
+///
+/// - Parameter endpoint: A string representing the full URL of the image API endpoint.
+class ImageLoadViewModel: ObservableObject {
     
     @Published var image: UIImage? = nil
     @Published var imageLoading: Bool = true
@@ -23,6 +26,7 @@ class ImageLoad: ObservableObject {
         self.repository = ImageRepositoryImpl(endpoint: endpoint)
     }
     
+    /// Loads image data asynchronously, updates internal state, and handles API errors.
     func loadImage() async {
         
         // Don't run if already loading the image
