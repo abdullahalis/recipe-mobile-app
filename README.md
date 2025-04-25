@@ -8,8 +8,8 @@ https://github.com/user-attachments/assets/60ffa7c6-a2c0-4f84-9b63-9701ed26fd41
 ### Focus Areas: 
 I focused on adhering to MVVM principles and modularizing code so that the models and views are agnostic of each other, allowing reusability and easier testing. I also focused on error handling and making sure optional types and bad data didn't negatively impact the user experience. Efficiency in networking and data fetching were also prioritized so I implemented an LRU cache to store reusable image data. 
 
-### Time Spent: 
-I spent around 10 hours on this project. I first planned how I wanted to architect the app and what objects and models I would need to create. Then I started with the backend data fetching, testing as I went to make sure everything worked as expected. I moved on to a simple UI, first creating dummy data to be displayed, and creating seperate views for different sections. Once I had a functional app that was properly displaying data from the API and had good error handling, I moved on to implementing a cache to make the networking for efficient and reduce repeated work. Finally, I wrote complete tests to assess performance and check edge cases.
+### Timeline: 
+I first planned how I wanted to architect the app and what objects and models I would need to create. Then I started with the backend data fetching, testing as I went to make sure everything worked as expected. I moved on to a simple UI, first creating dummy data to be displayed, and creating seperate views for different sections. Once I had a functional app that was properly displaying data from the API and had good error handling, I moved on to implementing a cache to make the networking for efficient and reduce repeated work. Finally, I wrote complete tests to assess performance and check edge cases.
 
 ### Trade-offs and Decisions:
 - LRU Cache simplicity vs performance
