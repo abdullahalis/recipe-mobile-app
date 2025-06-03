@@ -15,7 +15,7 @@ I first planned how I wanted to architect the app and what objects and models I 
 - LRU Cache simplicity vs performance
   - To reduce API usage, I implemented a local image cache with a hashmap and doubly linked list for O(1) reads, writes, and LRU reordering.
   - This added some memory overhead, especially if you're caching every image, so I added a max capacity to keep the memory usage in check
-  - I used NSLock for thread safety because I was running into problems when multiple threads accessed the cache conccurently. While this prevents race conditions, it might not scale well with too many threads, but it works perfectly for a small project like this. I priorited clarity over fine-tuned performance.
+  - I used NSLock for thread safety because I was running into problems when multiple threads accessed the cache conccurently. While this prevents race conditions, it might not scale well with too many threads, but it works perfectly for a small project like this. I prioritized clarity over fine-tuned performance.
  
 - Youtube Video Link vs Embed
   - I decided to embed the Youtube videos within the application, rather than linking to the video as a URL
