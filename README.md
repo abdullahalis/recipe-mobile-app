@@ -29,4 +29,4 @@ I first planned how I wanted to architect the app and what objects and models I 
 - The cache I made may be another weak point. This was my first time making my own cache from scratch, so it's quite barebones and could be improved with better concurrency handling.
 
 ### Additional Information:
-- The embedded Youtube player can cause issues when the video URL from the API no longer exists. The fix for this that I found was using 3rd party Youtube libraries that can provide data on whether the video is still available, but that would go against the requirements.
+- The embedded Youtube player can cause issues when the video URL from the API no longer exists. The fix for this that I found was using 3rd party Youtube libraries that can provide data on whether the video is still available.
